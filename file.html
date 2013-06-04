@@ -1,0 +1,32 @@
+<!DOCTYPE hrml>
+<html>
+	<head>
+		<title>Geolocation</title>	
+	</head>
+	
+	<body>	
+	<a href="#" id="get_location"> Get Location</a>
+	<div id = "map">
+	<iframe id="google_map" width="800" height="600" src="https://maps.google.com.br?output=embed"></iframe>
+	</div>
+	
+	<script>
+	var c = function(pos){
+		var latitud = pos.coords.latitude;
+		var longitud = pos.coords.longitude;
+		coords = latitud+ ', '+longitud;
+		
+		document.getElementById('google_map').setAttribute('src', 'https://maps.google.com.br/?q=' + coords +'&z=60&output=embed')
+	}
+	
+	document.getElementById('get_location').onclick = function(){
+		navigator.geolocation.getCurrentPosition(c);
+		return false;	
+	}
+	
+	</script>
+	
+	</body>
+
+
+</html>
