@@ -7,7 +7,8 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'Cade meu Onibus?',
+	'theme'=>'cmo',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -32,6 +33,16 @@ return array(
 
 	// application components
 	'components'=>array(
+		
+	'clientScript' => array(
+
+		'coreScriptUrl' => '/js/',
+
+		'enableJavaScript' => true,
+
+		),		
+	
+	
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
