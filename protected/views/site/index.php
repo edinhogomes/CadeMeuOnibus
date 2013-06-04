@@ -3,20 +3,51 @@
 
 $this->pageTitle=Yii::app()->name;
 ?>
+<h2>Sua localiza&ccedil;&atildeo:</h2>
+<html>	
+<p id="demo" onLoad="">
+	<div id="mapholder"></div>
+	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script>
+var x=document.getElementById("demo");
+function getLocation()
+  {
+  if (navigator.geolocation)
+    {
+    navigator.geolocation.getCurrentPosition(showPosition,showError);
+    }
+  else{x.innerHTML="Geolocation is not supported by this browser.";}
+  }
 
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
+function showPosition(position)
+  {
+  var latlon=position.coords.latitude+","+position.coords.longitude;
 
-<p>Congratulations! You have successfully created your Yii application.</p>
+  var img_url="http://maps.googleapis.com/maps/api/staticmap?center="
+  +latlon+"&zoom=14&size=400x300&sensor=false";
+  document.getElementById("mapholder").innerHTML="<img src='"+img_url+"'>";
+  }
 
-<p>You may change the content of this page by modifying the following two files:</p>
-<ul>
-	<li>View file: <code><?php echo __FILE__; ?></code></li>
-	<li>Layout file: <code><?php echo $this->getLayoutFile('main'); ?></code></li>
-</ul>
+function showError(error)
+  {
+  switch(error.code) 
+    {
+    case error.PERMISSION_DENIED:
+      x.innerHTML="User denied the request for Geolocation."
+      break;
+    case error.POSITION_UNAVAILABLE:
+      x.innerHTML="Location information is unavailable."
+      break;
+    case error.TIMEOUT:
+      x.innerHTML="The request to get user location timed out."
+      break;
+    case error.UNKNOWN_ERROR:
+      x.innerHTML="An unknown error occurred."
+      break;
+    }
+  }
 
-<p>For more details on how to further develop this application, please read
-the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-should you have any questions.</p>
+ getLocation()
+</script>
+</html>
 
-<a href="file.html"> Go to Your Site </a>
